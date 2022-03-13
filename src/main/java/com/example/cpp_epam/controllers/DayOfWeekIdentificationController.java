@@ -4,15 +4,12 @@ import com.example.cpp_epam.entities.DayOfWeek;
 import com.example.cpp_epam.exceptions.BadRequestException;
 import com.example.cpp_epam.exceptions.InternalServerErrorException;
 import com.example.cpp_epam.services.DayOfWeekService;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 
