@@ -1,6 +1,7 @@
 package com.example.cpp_epam.controllers;
 
 import com.example.cpp_epam.entities.DayOfWeek;
+import com.example.cpp_epam.services.DayOfWeekCache;
 import com.example.cpp_epam.services.DayOfWeekService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -19,11 +20,19 @@ public class DayOfWeekIdentificationController {
     @Autowired
     private DayOfWeekService dayOfWeekService;
 
+    @Autowired
+    private DayOfWeekCache linkedHashMap;
+
     @GetMapping("/checkday")
     public DayOfWeek checkday(@RequestParam(value = "year", required = true) @Min(0) int year,
                               @RequestParam(value = "day", required = true) @Min(0) int day) {
         DayOfWeek result = dayOfWeekService.dayOfWeekResult(year, day);
         logger.info("Successful getMapping");
         return result;
+    }
+
+    @GetMapping("/checkdayCache")
+    public DayOfWeekCache printLinkedHashMap(){
+        return linkedHashMap;
     }
 }
