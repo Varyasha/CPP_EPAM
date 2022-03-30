@@ -27,7 +27,7 @@ public class DayOfWeekService {
             logger.log(Level.WARNING, "ERROR 500! Day does not exist");
             throw new DayNotExistException("Day does not exist");
         }
-        if(linkedHashMap.isContain(weekDay)){
+        if(linkedHashMap.findByKey(weekDay)){
             result = linkedHashMap.getParameters(weekDay);
             logger.info("The result is taken from linkedHashMap");
         } else {
@@ -36,5 +36,9 @@ public class DayOfWeekService {
             logger.info("Added to linkedHashMap");
         }
         return new DayOfWeek(result.getName());
+    }
+
+    public DayOfWeekCache getLinkedHashMap(){
+        return linkedHashMap;
     }
 }

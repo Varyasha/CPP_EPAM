@@ -13,7 +13,7 @@ public class DayOfWeekCache {
     @JsonProperty
     private final Map<LocalDate, DayOfWeekNames> linkedHashMap = new LinkedHashMap<>();
 
-    public boolean isContain(LocalDate key) {
+    public boolean findByKey(LocalDate key) {
         return linkedHashMap.containsKey(key);
     }
 

@@ -20,9 +20,6 @@ public class DayOfWeekIdentificationController {
     @Autowired
     private DayOfWeekService dayOfWeekService;
 
-    @Autowired
-    private DayOfWeekCache linkedHashMap;
-
     @GetMapping("/checkday")
     public DayOfWeek checkday(@RequestParam(value = "year", required = true) @Min(0) int year,
                               @RequestParam(value = "day", required = true) @Min(0) int day) {
@@ -33,6 +30,6 @@ public class DayOfWeekIdentificationController {
 
     @GetMapping("/checkdayCache")
     public DayOfWeekCache printLinkedHashMap(){
-        return linkedHashMap;
+        return dayOfWeekService.getLinkedHashMap();
     }
 }
