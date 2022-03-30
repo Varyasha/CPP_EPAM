@@ -1,7 +1,7 @@
 package com.example.cpp_epam.entities;
 
 public enum DayOfWeekNames {
-    MANDAY("понедельник"),
+    MONDAY("понедельник"),
     TUESDAY("вторник"),
     WEDNESDAY("среда"),
     THURSDAY("четверг"),
