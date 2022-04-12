@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,15 +19,8 @@ public class DayOfWeekService {
     @Autowired
     private DayOfWeekCache linkedHashMap;
 
-    private final Semaphore semaphore;
-
-    @Autowired
-    public DayOfWeekService() {
-        this.semaphore = new Semaphore(1, true);
-    }
-
     public DayOfWeek dayOfWeekResult(int year, int day) {
-        new RequestCounterThread(semaphore);
+        new RequestCounterThread(Thread.currentThread().getName()).start();
         LocalDate weekDay;
         DayOfWeekNames result;
         try {
@@ -37,7 +29,7 @@ public class DayOfWeekService {
             logger.log(Level.WARNING, "ERROR 500! Day does not exist");
             throw new DayNotExistException("Day does not exist");
         }
-        if(linkedHashMap.findByKey(weekDay)){
+        if (linkedHashMap.findByKey(weekDay)) {
             result = linkedHashMap.getParameters(weekDay);
             logger.info("The result is taken from linkedHashMap");
         } else {
@@ -48,7 +40,7 @@ public class DayOfWeekService {
         return new DayOfWeek(result.getName());
     }
 
-    public DayOfWeekCache getLinkedHashMap(){
+    public DayOfWeekCache getLinkedHashMap() {
         return linkedHashMap;
     }
 }
