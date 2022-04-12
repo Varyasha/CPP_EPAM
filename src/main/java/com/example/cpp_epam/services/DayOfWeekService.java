@@ -1,5 +1,6 @@
 package com.example.cpp_epam.services;
 
+import com.example.cpp_epam.counter.RequestCounterThread;
 import com.example.cpp_epam.entities.DayOfWeek;
 import com.example.cpp_epam.entities.DayOfWeekNames;
 import com.example.cpp_epam.exceptions.DayNotExistException;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +20,15 @@ public class DayOfWeekService {
     @Autowired
     private DayOfWeekCache linkedHashMap;
 
+    private final Semaphore semaphore;
+
+    @Autowired
+    public DayOfWeekService() {
+        this.semaphore = new Semaphore(1, true);
+    }
+
     public DayOfWeek dayOfWeekResult(int year, int day) {
+        new RequestCounterThread(semaphore);
         LocalDate weekDay;
         DayOfWeekNames result;
         try {
