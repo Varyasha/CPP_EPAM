@@ -1,7 +1,5 @@
 package com.example.cpp_epam.controllers;
 
-import com.example.cpp_epam.counter.RequestCounterThread;
-import com.example.cpp_epam.counter.Synchronization;
 import com.example.cpp_epam.entities.DayOfWeek;
 import com.example.cpp_epam.services.DayOfWeekCache;
 import com.example.cpp_epam.services.DayOfWeekService;
@@ -25,9 +23,7 @@ public class DayOfWeekIdentificationController {
     @GetMapping("/checkday")
     public DayOfWeek checkday(@RequestParam(value = "year", required = true) @Min(0) int year,
                               @RequestParam(value = "day", required = true) @Min(0) int day) {
-        RequestCounterThread requestCounterThread = new RequestCounterThread();
         DayOfWeek result = dayOfWeekService.dayOfWeekResult(year, day);
-        Synchronization.semaphore.release();
         logger.info("Successful getMapping");
         return result;
     }

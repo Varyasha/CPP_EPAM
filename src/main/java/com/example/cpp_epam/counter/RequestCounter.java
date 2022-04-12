@@ -1,10 +1,10 @@
 package com.example.cpp_epam.counter;
 
 public class RequestCounter {
-    private static int counter = 0;
+    private static int counter;
 
     public static void increment() {
-        counter++;
+        ++counter;
     }
 
     public static Integer getCounter() {
