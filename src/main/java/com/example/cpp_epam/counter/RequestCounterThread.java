@@ -33,6 +33,6 @@ public class RequestCounterThread extends Thread {
         } catch (InterruptedException e) {
             logger.log(Level.WARNING, "Thread was interrupted");
         }
-        System.out.println("Поток " + threadName + " (parent " + nameOfParentThread + ")" + " завершается.");
+        System.out.println("Thread " + threadName + " (parent " + nameOfParentThread + ")" + " is terminating.");
     }
 }
